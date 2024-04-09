@@ -5,10 +5,12 @@ const withdrawBtn = document.getElementById("withdraw-button");
 let current_balance;
 let transaction_limits;
 
-const deposit_obj = {
-  amount: 2000,
+const request_obj = {
+  amount: 19999,
   date: new Date().toISOString(),
+  transaction_type: "withdrawal",
 };
+
 async function init() {
   try {
     transaction_limits = await get_limits();
@@ -60,14 +62,21 @@ async function get_limits() {
   }
 }
 
-async function update_balance_and_transaction(deposit_obj) {
+async function update_balance_and_transaction(request_obj) {
+  const requestBody = {
+    amount:
+      request_obj.transaction_type === "withdrawal"
+        ? current_balance - request_obj.amount
+        : current_balance + request_obj.amount,
+  };
+
   const updateBalance = fetch(`${local_json_db}/balance`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      amount: current_balance + deposit_obj.amount,
+      amount: requestBody.amount,
     }),
   }).then((res) => {
     console.log(res);
@@ -89,13 +98,25 @@ async function update_balance_and_transaction(deposit_obj) {
       }
     })
     .then((data) => {
-      data = data;
-      //   console.log(data);
-      const lastDeposits = data.deposit.last_deposits;
-      lastDeposits.push({ ID: lastDeposits.length + 1, ...deposit_obj });
-      data.deposit.last_deposits = lastDeposits;
-      data.deposit.total = data.deposit.total + deposit_obj.amount;
-      data.deposit.count = data.deposit.count + 1;
+      if (request_obj.transaction_type == "deposit") {
+        const lastDeposits = data.deposit.last_deposits;
+        lastDeposits.push({ ID: lastDeposits.length + 1, ...request_obj });
+        data.deposit.last_deposits = lastDeposits;
+        data.deposit.total = data.deposit.total + request_obj.amount;
+        data.deposit.count = data.deposit.count + 1;
+      }
+
+      if (request_obj.transaction_type == "withdrawal") {
+        const lastWithdrawals = data.withdrawal.last_withdrawals;
+        lastWithdrawals.push({
+          ID: lastWithdrawals.length + 1,
+          ...request_obj,
+        });
+        data.withdrawal.last_withdrawals = lastWithdrawals;
+        data.withdrawal.total = data.withdrawal.total + request_obj.amount;
+        data.withdrawal.count = data.withdrawal.count + 1;
+      }
+
       console.log(data);
       return fetch(`${local_json_db}/transactions`, {
         method: "PATCH",
@@ -126,7 +147,7 @@ async function update_balance_and_transaction(deposit_obj) {
     });
 }
 
-async function deposit(deposit_obj) {
+async function deposit(request_obj) {
   try {
     const response = await fetch(`${local_json_db}/transactions`);
     if (!response.ok) {
@@ -139,10 +160,10 @@ async function deposit(deposit_obj) {
 
     console.log(transaction_limits);
 
-    console.log(deposit_obj);
+    console.log(request_obj);
 
     if (
-      deposit_obj.amount > transaction_limits.max_deposit_amount_per_transaction
+      request_obj.amount > transaction_limits.max_deposit_amount_per_transaction
     ) {
       console.log(
         `Your deposit exceeds the maximum transaction limit which is Ksh ${transaction_limits.max_deposit_amount_per_transaction}`
@@ -151,7 +172,7 @@ async function deposit(deposit_obj) {
     }
 
     if (
-      deposit_obj.amount + transactions_data.total >
+      request_obj.amount + transactions_data.total >
       transaction_limits.max_deposit_total_per_day
     ) {
       console.log(
@@ -170,7 +191,7 @@ async function deposit(deposit_obj) {
       return;
     }
 
-    await update_balance_and_transaction(deposit_obj);
+    await update_balance_and_transaction(request_obj);
     return;
   } catch (error) {
     console.error("Error in deposit function:", error.message);
@@ -178,7 +199,60 @@ async function deposit(deposit_obj) {
   }
 }
 
-// ------------------------ UPDATE BALANCE & TRANSACTION ------------------------
+async function withdraw(request_obj) {
+  try {
+    const response = await fetch(`${local_json_db}/transactions`);
+    if (!response.ok) {
+      throw new Error(`ERROR! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    const transactions_data = data.withdrawal;
+
+    if (
+      request_obj.amount >
+      transaction_limits.max_withdrawal_amount_per_transaction
+    ) {
+      console.log(
+        `Your withdrawal exceeds the maximum withdrawal limit which is Ksh ${transaction_limits.max_withdrawal_amount_per_transaction}`
+      );
+      return;
+    }
+
+    if (
+      request_obj.amount + transactions_data.total >
+      transaction_limits.max_withdrawal_total_per_day
+    ) {
+      console.log(
+        `Your withdrawal exceeds the daily maximum amount which is Ksh ${transaction_limits.max_withdrawal_total_per_day}`
+      );
+      return;
+    }
+
+    if (
+      transactions_data.count + 1 >
+      transaction_limits.max_no_of_withdrawals_per_day
+    ) {
+      console.log(
+        `You have used up all your ${transaction_limits.max_no_of_withdrawals_per_day} withdrawals for the day.`
+      );
+      return;
+    }
+
+    if (request_obj.amount > current_balance) {
+      console.log(
+        `You do not have enough balance to withdraw Ksk${request_obj.amount}.`
+      );
+      return;
+    }
+    await update_balance_and_transaction(request_obj);
+    return;
+  } catch (error) {
+    console.error("Error in deposit function:", error.message);
+    throw error;
+  }
+}
+
+// ------------------------ INITIATE APP ------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
@@ -186,10 +260,10 @@ document.addEventListener("DOMContentLoaded", () => {
   get_balance();
   depositBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    deposit(deposit_obj);
+    deposit(request_obj);
   });
   withdrawBtn.addEventListener("click", () => {
-    withdraw();
+    withdraw(request_obj);
   });
   getBalanceBtn.addEventListener("click", () => {
     get_balance();
