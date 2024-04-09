@@ -1,20 +1,13 @@
 const local_json_db = `http://localhost:3000`;
 const depositBtn = document.getElementById("deposit-button");
-const getBalanceBtn = document.getElementById("get-balance");
+const getBalanceBtn = document.getElementById("get_balance_btn");
 const withdrawBtn = document.getElementById("withdraw-button");
 let current_balance;
 let transaction_limits;
 
-const request_obj = {
-  amount: 19999,
-  date: new Date().toISOString(),
-  transaction_type: "withdrawal",
-};
-
 async function init() {
   try {
     transaction_limits = await get_limits();
-    console.log(transaction_limits);
   } catch (error) {
     console.error("Error initializing app:", error.message);
   }
@@ -31,7 +24,6 @@ function get_balance() {
     })
     .then((data) => {
       current_balance = data.amount;
-      console.log(data);
     })
     .catch((error) => {
       console.error("Error message:", error.message);
@@ -256,15 +248,56 @@ async function withdraw(request_obj) {
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
-
   get_balance();
-  depositBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    deposit(request_obj);
+  const deposit_service = document.getElementById("deposit_service");
+  const withdraw_service = document.getElementById("withdraw_service");
+  const deposit_form = document.getElementById("makeADeposit");
+  const withdrawal_form = document.getElementById("makeAWithdrawal");
+  deposit_service.addEventListener("click", () => {
+    if (deposit_form.style.display === "none") {
+      deposit_form.style.display = "block";
+      withdrawal_form.style.display = "none";
+    } else {
+      deposit_form.style.display = "none";
+    }
   });
-  withdrawBtn.addEventListener("click", () => {
+  withdraw_service.addEventListener("click", () => {
+    if (withdrawal_form.style.display === "none") {
+      withdrawal_form.style.display = "block";
+      deposit_form.style.display = "none";
+    } else {
+      withdrawal_form.style.display = "none";
+    }
+  });
+  const withdrawalForm = document.getElementById("makeAWithdrawal");
+  const withdrawAmountInput = document.getElementById("withdrawAmountInput");
+  const withdrawError = document.getElementById("withdrawError");
+  withdrawalForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const request_obj = {
+      amount: parseInt(withdrawAmountInput.value),
+      date: new Date().toISOString(),
+      transaction_type: "withdrawal",
+    };
+    console.log(request_obj);
     withdraw(request_obj);
   });
+
+  const depositForm = document.getElementById("makeADeposit");
+  const depositAmountInput = document.getElementById("depositAmountInput");
+  const depositError = document.getElementById("depositError");
+
+  depositForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const request_obj = {
+      amount: parseInt(depositAmountInput.value),
+      date: new Date().toISOString(),
+      transaction_type: "deposit",
+    };
+    console.log(request_obj);
+    deposit(request_obj);
+  });
+
   getBalanceBtn.addEventListener("click", () => {
     get_balance();
   });

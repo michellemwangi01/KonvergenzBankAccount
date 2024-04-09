@@ -7,14 +7,83 @@
     <title>Bank Account | Michelle</title>
   </head>
   <body>
-    <h1>Michelle's Account</h1>
-    <div>
-      <div>
-        <h2>Actions</h2>
-        <button id="get-balance">Get Balance</button>
-        <button id="deposit-button">Deposit</button>
-        <button id="withdraw-button">Withdraw</button>
+    <h1 id="welcome_info">Welcome, Michelle</h1>
+    <div class="account_details">
+      <h2 id="your_details_title">Your Account Details</h2>
+     <div class="acct-info"> 
+      <div class="container">
+          <button class="balance-button get-balance" id="">Name:</button>
+          <span class="stars">Michelle Mwangi</span>
+        </div>
+        <div class="container">
+          <button class="balance-button get-balance" id="">Account ID:</button>
+          <span class="stars">81982665</span>
+        </div>
+        <div class="container">
+          <button class="balance-button get-balance" id="get_balance_btn">
+            View Balance:
+          </button>
+          <span class="stars">******* Ksh</span>
+        </div></div>
+       
       </div>
+    </div>
+
+    <div class="services">
+      <!-- <div class="service-item">
+        <h3>Balance</h3>
+        <p>Get your current account balance</p>
+        <button class="service-button" id="get-balance">View Balance</button>
+      </div> -->
+      <div class="service-item" id="deposit_service">
+        <h1>Deposit</h1>
+        <h4>Make a deposit to your account</h4>
+      </div>
+      <div class="service-item" id="withdraw_service">
+        <h1>Withdraw</h1>
+        <h4>Make a withdrawal from your account</h4>
+      </div>
+     
+    </div>
+    <div id="forms_container"></div>
+         <form id="makeADeposit" style="display: none;">
+            <fieldset id="IdentityKinInfo" class="row g-3 scheduler-border">
+                <legend class="scheduler-border"> Deposit </legend>
+                <div class="">
+                    <p class="limits_notice">
+                  Please note the following limits:
+                  <ul>
+<li>You can deposit a maximum of Kes 40,000 per transaction.</li>  <li>You can deposit up to Kes 150,000 per day.</li><li>You are allowed 4 deposits a day.</li> </p>
+                  </ul>
+                  
+
+                    <span class="clientdeets" id="">Enter the amount you wish to deposit:</span>
+                    <input id="depositAmountInput" min="1" max="" value = '' type="number" name="kinRelationship"class="myformControl" aria-label="Sizing example input" aria-describedby="">
+                    <!-- <span><p class='errorMessages'></p></span> -->
+                </div>
+               <button class="service-button" id="submit" type="submit">Deposit</button>
+            </fieldset>
+        </form>
+         <form id="makeAWithdrawal" style="display: none;">
+            <fieldset id="IdentityKinInfo" class="row g-3 scheduler-border">
+                <legend class="scheduler-border"> Withdraw </legend>
+                <div class="">
+                    <p class="limits_notice">
+                  Please note the following limits:
+                  <ul>
+<li>You can withdraw a maximum of Kes 20,000 per transaction.</li>  <li>You can withdraw up to Kes 50,000 per day.</li><li>You are allowed 3 withdrawals a day.</li> </p>
+                  </ul>
+                  
+
+                    <span class="clientdeets" id="">Enter the amount you wish to withdraw:</span>
+                    <input id="withdrawAmountInput" min="1" max="" value = '' type="number" name="kinRelationship"class="myformControl" aria-label="Sizing example input" aria-describedby="">
+                    <!-- <span><p class='errorMessages'></p></span> -->
+                </div>
+                <button class="service-button" id="submit" type="submit">Withdraw</button>
+            </fieldset>
+        </form>
+    <div>
+     
       <div></div>
     </div>
     <script src="./script.js"></script>

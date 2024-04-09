@@ -1,11 +1,11 @@
 {
   "balance": {
-    "amount": 11001
+    "amount": 1090
   },
   "transactions": {
     "deposit": {
-      "count": 5,
-      "total": 146000,
+      "count": 1,
+      "total": 91,
       "last_deposits": [
         {
           "ID": 1,
@@ -24,12 +24,24 @@
           "amount": 2000,
           "date": "2024-04-09T19:18:27.096Z",
           "transaction_type": "deposit"
+        },
+        {
+          "ID": 4,
+          "amount": null,
+          "date": "2024-04-09T22:22:44.202Z",
+          "transaction_type": "deposit"
+        },
+        {
+          "ID": 5,
+          "amount": 90,
+          "date": "2024-04-09T22:26:08.264Z",
+          "transaction_type": "deposit"
         }
       ]
     },
     "withdrawal": {
-      "count": 2,
-      "total": 42298,
+      "count": 3,
+      "total": 42299,
       "last_withdrawals": [
         {
           "ID": 1,
@@ -77,6 +89,12 @@
           "ID": 8,
           "amount": 19999,
           "date": "2024-04-09T19:42:39.308Z",
+          "transaction_type": "withdrawal"
+        },
+        {
+          "ID": 9,
+          "amount": 1,
+          "date": "2024-04-09T22:12:50.875Z",
           "transaction_type": "withdrawal"
         }
       ]
