@@ -66,7 +66,7 @@ button.link-button {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-.stars {
+.balance {
   flex-grow: 1;
 }
 .service-item {
@@ -190,3 +190,17 @@ legend {
   font-size: 1.5rem;
 }
 /* ********************************end of form CSS************** */
+
+.notification {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  margin-bottom: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  text-align: center;
+}
+#selectAservice {
+  text-align: center;
+  font-size: 1rem;
+}

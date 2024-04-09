@@ -7,6 +7,8 @@
     <title>Bank Account | Michelle</title>
   </head>
   <body>
+    <div id="notificationContainer"></div>
+
     <h1 id="welcome_info">Welcome, Michelle</h1>
     <div class="account_details">
       <h2 id="your_details_title">Your Account Details</h2>
@@ -23,18 +25,14 @@
           <button class="balance-button get-balance" id="get_balance_btn">
             View Balance:
           </button>
-          <span class="stars">******* Ksh</span>
+          <span class="balance" id="balance_value"> KES *****.00</span>
         </div></div>
        
       </div>
     </div>
-
+ <p id="selectAservice">Select a service</p>
     <div class="services">
-      <!-- <div class="service-item">
-        <h3>Balance</h3>
-        <p>Get your current account balance</p>
-        <button class="service-button" id="get-balance">View Balance</button>
-      </div> -->
+    
       <div class="service-item" id="deposit_service">
         <h1>Deposit</h1>
         <h4>Make a deposit to your account</h4>

@@ -135,7 +135,7 @@ async function update_balance_and_transaction(request_obj) {
       );
     })
     .catch((error) => {
-      console.error("Did not upate balance and transaction", error.message);
+      console.error("Did not upate balance and transaction", error.status);
     });
 }
 
@@ -157,8 +157,8 @@ async function deposit(request_obj) {
     if (
       request_obj.amount > transaction_limits.max_deposit_amount_per_transaction
     ) {
-      console.log(
-        `Your deposit exceeds the maximum transaction limit which is Ksh ${transaction_limits.max_deposit_amount_per_transaction}`
+      displayNotification(
+        `ERROR! Your deposit exceeds the maximum transaction limit which is KES ${transaction_limits.max_deposit_amount_per_transaction.toLocaleString()}.`
       );
       return;
     }
@@ -167,8 +167,8 @@ async function deposit(request_obj) {
       request_obj.amount + transactions_data.total >
       transaction_limits.max_deposit_total_per_day
     ) {
-      console.log(
-        `Your deposit exceeds the daily maximum deposit amount which is Ksh ${transaction_limits.max_deposit_total_per_day}`
+      displayNotification(
+        `ERROR! Your deposit exceeds the daily maximum deposit amount which is KES ${transaction_limits.max_deposit_total_per_day.toLocaleString()}.`
       );
       return;
     }
@@ -177,13 +177,16 @@ async function deposit(request_obj) {
       transactions_data.count + 1 >
       transaction_limits.max_no_of_deposits_per_day
     ) {
-      console.log(
-        `You have used up all your ${transaction_limits.max_no_of_deposits_per_day} deposits for the day.`
+      displayNotification(
+        `ERROR! You have used up all your ${transaction_limits.max_no_of_deposits_per_day} deposits for the day.`
       );
       return;
     }
 
     await update_balance_and_transaction(request_obj);
+    displayNotification(
+      `SUCCESS! Your ${request_obj.transaction_type} has been successfully completed!`
+    );
     return;
   } catch (error) {
     console.error("Error in deposit function:", error.message);
@@ -204,8 +207,8 @@ async function withdraw(request_obj) {
       request_obj.amount >
       transaction_limits.max_withdrawal_amount_per_transaction
     ) {
-      console.log(
-        `Your withdrawal exceeds the maximum withdrawal limit which is Ksh ${transaction_limits.max_withdrawal_amount_per_transaction}`
+      displayNotification(
+        `ERROR! Your withdrawal exceeds the maximum withdrawal limit which is KES ${transaction_limits.max_withdrawal_amount_per_transaction.toLocaleString()}.`
       );
       return;
     }
@@ -214,8 +217,8 @@ async function withdraw(request_obj) {
       request_obj.amount + transactions_data.total >
       transaction_limits.max_withdrawal_total_per_day
     ) {
-      console.log(
-        `Your withdrawal exceeds the daily maximum amount which is Ksh ${transaction_limits.max_withdrawal_total_per_day}`
+      displayNotification(
+        `ERROR! Your withdrawal exceeds the daily maximum amount which is KES ${transaction_limits.max_withdrawal_total_per_day.toLocaleString()}.`
       );
       return;
     }
@@ -224,15 +227,15 @@ async function withdraw(request_obj) {
       transactions_data.count + 1 >
       transaction_limits.max_no_of_withdrawals_per_day
     ) {
-      console.log(
-        `You have used up all your ${transaction_limits.max_no_of_withdrawals_per_day} withdrawals for the day.`
+      displayNotification(
+        `ERROR! You have used up all your ${transaction_limits.max_no_of_withdrawals_per_day} withdrawals for the day.`
       );
       return;
     }
 
     if (request_obj.amount > current_balance) {
-      console.log(
-        `You do not have enough balance to withdraw Ksk${request_obj.amount}.`
+      displayNotification(
+        `ERROR! You do not have enough balance to withdraw Ksk${request_obj.amount}.`
       );
       return;
     }
@@ -242,6 +245,21 @@ async function withdraw(request_obj) {
     console.error("Error in deposit function:", error.message);
     throw error;
   }
+}
+
+function displayNotification(message) {
+  const notificationDiv = document.createElement("div");
+  notificationDiv.classList.add("notification");
+  notificationDiv.textContent = message;
+
+  const notificationContainer = document.getElementById(
+    "notificationContainer"
+  );
+  notificationContainer.appendChild(notificationDiv);
+
+  setTimeout(() => {
+    notificationDiv.remove();
+  }, 10000);
 }
 
 // ------------------------ INITIATE APP ------------------------
@@ -271,7 +289,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const withdrawalForm = document.getElementById("makeAWithdrawal");
   const withdrawAmountInput = document.getElementById("withdrawAmountInput");
-  const withdrawError = document.getElementById("withdrawError");
   withdrawalForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const request_obj = {
@@ -285,7 +302,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const depositForm = document.getElementById("makeADeposit");
   const depositAmountInput = document.getElementById("depositAmountInput");
-  const depositError = document.getElementById("depositError");
 
   depositForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -299,6 +315,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   getBalanceBtn.addEventListener("click", () => {
-    get_balance();
+    const balance_value = document.getElementById("balance_value");
+    const balance = get_balance();
+    const formattedBalance = balance.toLocaleString("en-US", {
+      style: "currency",
+      currency: "KES",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+    balance_value.innerText = `${formattedBalance}`;
   });
 });
