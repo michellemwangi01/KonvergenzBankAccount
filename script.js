@@ -133,6 +133,10 @@ async function update_balance_and_transaction(request_obj) {
         "Transaction count updated successfully:",
         updateTransactionsResponse
       );
+      localStorage.setItem(
+        "notificationMessage",
+        `SUCCESS! Your ${request_obj.transaction_type} has been successfully completed.`
+      );
     })
     .catch((error) => {
       console.error("Did not upate balance and transaction", error.status);
@@ -157,7 +161,7 @@ async function deposit(request_obj) {
     if (
       request_obj.amount > transaction_limits.max_deposit_amount_per_transaction
     ) {
-      displayNotification(
+      displayErrorNotification(
         `ERROR! Your deposit exceeds the maximum transaction limit which is KES ${transaction_limits.max_deposit_amount_per_transaction.toLocaleString()}.`
       );
       return;
@@ -167,7 +171,7 @@ async function deposit(request_obj) {
       request_obj.amount + transactions_data.total >
       transaction_limits.max_deposit_total_per_day
     ) {
-      displayNotification(
+      displayErrorNotification(
         `ERROR! Your deposit exceeds the daily maximum deposit amount which is KES ${transaction_limits.max_deposit_total_per_day.toLocaleString()}.`
       );
       return;
@@ -177,16 +181,14 @@ async function deposit(request_obj) {
       transactions_data.count + 1 >
       transaction_limits.max_no_of_deposits_per_day
     ) {
-      displayNotification(
+      displayErrorNotification(
         `ERROR! You have used up all your ${transaction_limits.max_no_of_deposits_per_day} deposits for the day.`
       );
       return;
     }
 
     await update_balance_and_transaction(request_obj);
-    displayNotification(
-      `SUCCESS! Your ${request_obj.transaction_type} has been successfully completed!`
-    );
+
     return;
   } catch (error) {
     console.error("Error in deposit function:", error.message);
@@ -207,7 +209,7 @@ async function withdraw(request_obj) {
       request_obj.amount >
       transaction_limits.max_withdrawal_amount_per_transaction
     ) {
-      displayNotification(
+      displayErrorNotification(
         `ERROR! Your withdrawal exceeds the maximum withdrawal limit which is KES ${transaction_limits.max_withdrawal_amount_per_transaction.toLocaleString()}.`
       );
       return;
@@ -217,7 +219,7 @@ async function withdraw(request_obj) {
       request_obj.amount + transactions_data.total >
       transaction_limits.max_withdrawal_total_per_day
     ) {
-      displayNotification(
+      displayErrorNotification(
         `ERROR! Your withdrawal exceeds the daily maximum amount which is KES ${transaction_limits.max_withdrawal_total_per_day.toLocaleString()}.`
       );
       return;
@@ -227,14 +229,14 @@ async function withdraw(request_obj) {
       transactions_data.count + 1 >
       transaction_limits.max_no_of_withdrawals_per_day
     ) {
-      displayNotification(
+      displayErrorNotification(
         `ERROR! You have used up all your ${transaction_limits.max_no_of_withdrawals_per_day} withdrawals for the day.`
       );
       return;
     }
 
     if (request_obj.amount > current_balance) {
-      displayNotification(
+      displayErrorNotification(
         `ERROR! You do not have enough balance to withdraw Ksk${request_obj.amount}.`
       );
       return;
@@ -247,9 +249,9 @@ async function withdraw(request_obj) {
   }
 }
 
-function displayNotification(message) {
+function displayErrorNotification(message) {
   const notificationDiv = document.createElement("div");
-  notificationDiv.classList.add("notification");
+  notificationDiv.classList.add("error_notification");
   notificationDiv.textContent = message;
 
   const notificationContainer = document.getElementById(
@@ -259,7 +261,21 @@ function displayNotification(message) {
 
   setTimeout(() => {
     notificationDiv.remove();
-  }, 10000);
+  }, 7000);
+}
+function displaySuccessNotification(message) {
+  const notificationDiv = document.createElement("div");
+  notificationDiv.classList.add("success_notification");
+  notificationDiv.textContent = message;
+
+  const notificationContainer = document.getElementById(
+    "notificationContainer"
+  );
+  notificationContainer.appendChild(notificationDiv);
+
+  setTimeout(() => {
+    notificationDiv.remove();
+  }, 7000);
 }
 
 // ------------------------ INITIATE APP ------------------------
@@ -325,4 +341,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     balance_value.innerText = `${formattedBalance}`;
   });
+
+  const notificationMessage = localStorage.getItem("notificationMessage");
+
+  if (notificationMessage) {
+    displaySuccessNotification(notificationMessage);
+    localStorage.removeItem("notificationMessage");
+  }
 });

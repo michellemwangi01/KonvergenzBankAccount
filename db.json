@@ -1,11 +1,11 @@
 {
   "balance": {
-    "amount": 1137
+    "amount": 2273
   },
   "transactions": {
     "deposit": {
-      "count": 4,
-      "total": 138,
+      "count": 2,
+      "total": 1319,
       "last_deposits": [
         {
           "ID": 1,
@@ -54,12 +54,48 @@
           "amount": 23,
           "date": "2024-04-09T22:55:27.725Z",
           "transaction_type": "deposit"
+        },
+        {
+          "ID": 9,
+          "amount": 234,
+          "date": "2024-04-09T23:06:37.857Z",
+          "transaction_type": "deposit"
+        },
+        {
+          "ID": 10,
+          "amount": 9,
+          "date": "2024-04-09T23:07:25.790Z",
+          "transaction_type": "deposit"
+        },
+        {
+          "ID": 11,
+          "amount": 9,
+          "date": "2024-04-09T23:10:58.009Z",
+          "transaction_type": "deposit"
+        },
+        {
+          "ID": 12,
+          "amount": 9,
+          "date": "2024-04-09T23:19:48.524Z",
+          "transaction_type": "deposit"
+        },
+        {
+          "ID": 13,
+          "amount": 908,
+          "date": "2024-04-09T23:30:10.476Z",
+          "transaction_type": "deposit"
+        },
+        {
+          "ID": 14,
+          "amount": 12,
+          "date": "2024-04-09T23:31:34.597Z",
+          "transaction_type": "deposit"
         }
       ]
     },
     "withdrawal": {
-      "count": 3,
-      "total": 42299,
+      "count": 2,
+      "total": 42344,
       "last_withdrawals": [
         {
           "ID": 1,
@@ -113,6 +149,36 @@
           "ID": 9,
           "amount": 1,
           "date": "2024-04-09T22:12:50.875Z",
+          "transaction_type": "withdrawal"
+        },
+        {
+          "ID": 10,
+          "amount": 9,
+          "date": "2024-04-09T23:13:47.544Z",
+          "transaction_type": "withdrawal"
+        },
+        {
+          "ID": 11,
+          "amount": 9,
+          "date": "2024-04-09T23:14:38.680Z",
+          "transaction_type": "withdrawal"
+        },
+        {
+          "ID": 12,
+          "amount": 9,
+          "date": "2024-04-09T23:20:16.858Z",
+          "transaction_type": "withdrawal"
+        },
+        {
+          "ID": 13,
+          "amount": 9,
+          "date": "2024-04-09T23:30:28.949Z",
+          "transaction_type": "withdrawal"
+        },
+        {
+          "ID": 14,
+          "amount": 9,
+          "date": "2024-04-09T23:32:03.384Z",
           "transaction_type": "withdrawal"
         }
       ]

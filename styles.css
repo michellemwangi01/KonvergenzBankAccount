@@ -191,12 +191,21 @@ legend {
 }
 /* ********************************end of form CSS************** */
 
-.notification {
+.error_notification {
   background-color: #f8d7da;
   color: #721c24;
   padding: 1rem;
   margin-bottom: 10px;
   border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  text-align: center;
+}
+.success_notification {
+  background-color: #a8d496;
+  color: green;
+  padding: 1rem;
+  margin-bottom: 10px;
+  border: 1px solid #a8d496;
   border-radius: 5px;
   text-align: center;
 }
