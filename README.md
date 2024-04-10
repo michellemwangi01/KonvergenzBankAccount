@@ -18,7 +18,6 @@ git clone git@github.com:michellemwangi01/KonvergenzBankAccount.git
 
 ```
 cd bank_account_konvergenz
-
 ```
 
 3. **Start JSON Server**
@@ -34,12 +33,17 @@ cd bank_account_konvergenz
 ## Features
 
 - **Deposit and Withdrawal**
+- The application implements the `/withdrawal` and `/deposit` endpoints to allow the user to make withdrawals and deposits.
 - Users can perform deposit and withdrawal transactions based on specified limits.
+- When a withdrawal or deposit is made, the balance is simultaneously also updated.
 - The application checks transaction limits retrieved from the JSON server (`/limits`) before processing each transaction.
   ![alt text](Images/image-3.png)
 
+- **Limits**
+- The application implements a bonus `/limits` endpoint to allow the limits to be dynamically retrieved from the database.
+
 - **Balance Retrieval**
-- Users can retrieve and display their current balance (`/balance`) by clicking the "Get Balance" button.
+- Users can retrieve and display their current balance (`/balance`) by clicking the "Display Balance" button.
   ![alt text](Images/image-1.png)
 
 - **Error Handling and Notifications**

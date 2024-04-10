@@ -2,6 +2,14 @@ const local_json_db = `http://localhost:3000`;
 const depositBtn = document.getElementById("deposit-button");
 const getBalanceBtn = document.getElementById("get_balance_btn");
 const withdrawBtn = document.getElementById("withdraw-button");
+const deposit_service = document.getElementById("deposit_service");
+const withdraw_service = document.getElementById("withdraw_service");
+const deposit_form = document.getElementById("makeADeposit");
+const withdrawal_form = document.getElementById("makeAWithdrawal");
+const withdrawalForm = document.getElementById("makeAWithdrawal");
+const withdrawAmountInput = document.getElementById("withdrawAmountInput");
+const depositForm = document.getElementById("makeADeposit");
+const depositAmountInput = document.getElementById("depositAmountInput");
 let current_balance;
 let transaction_limits;
 
@@ -38,6 +46,7 @@ async function get_limits() {
       throw new Error(`ERROR! Status: ${response.status}`);
     }
     const data = await response.json();
+    console.log(data);
     const limits = {
       max_deposit_amount_per_transaction: data.deposit.per_transaction,
       max_deposit_total_per_day: data.deposit.per_day,
@@ -61,6 +70,7 @@ async function update_balance_and_transaction(request_obj) {
         ? current_balance - request_obj.amount
         : current_balance + request_obj.amount,
   };
+  const endpoint = request_obj.transaction_type;
 
   const updateBalance = fetch(`${local_json_db}/balance`, {
     method: "PATCH",
@@ -79,7 +89,7 @@ async function update_balance_and_transaction(request_obj) {
     }
   });
 
-  const updateTransactions = fetch(`${local_json_db}/transactions`)
+  const updateTransactions = fetch(`${local_json_db}/${endpoint}`)
     .then((res) => {
       if (res.ok) {
         return res.json();
@@ -91,26 +101,26 @@ async function update_balance_and_transaction(request_obj) {
     })
     .then((data) => {
       if (request_obj.transaction_type == "deposit") {
-        const lastDeposits = data.deposit.last_deposits;
+        const lastDeposits = data.last_deposits;
         lastDeposits.push({ ID: lastDeposits.length + 1, ...request_obj });
-        data.deposit.last_deposits = lastDeposits;
-        data.deposit.total = data.deposit.total + request_obj.amount;
-        data.deposit.count = data.deposit.count + 1;
+        data.last_deposits = lastDeposits;
+        data.total = data.total + request_obj.amount;
+        data.count = data.count + 1;
       }
 
       if (request_obj.transaction_type == "withdrawal") {
-        const lastWithdrawals = data.withdrawal.last_withdrawals;
+        const lastWithdrawals = data.last_withdrawals;
         lastWithdrawals.push({
           ID: lastWithdrawals.length + 1,
           ...request_obj,
         });
-        data.withdrawal.last_withdrawals = lastWithdrawals;
-        data.withdrawal.total = data.withdrawal.total + request_obj.amount;
-        data.withdrawal.count = data.withdrawal.count + 1;
+        data.last_withdrawals = lastWithdrawals;
+        data.total = data.total + request_obj.amount;
+        data.count = data.count + 1;
       }
 
       console.log(data);
-      return fetch(`${local_json_db}/transactions`, {
+      return fetch(`${local_json_db}/${endpoint}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -145,12 +155,12 @@ async function update_balance_and_transaction(request_obj) {
 
 async function deposit(request_obj) {
   try {
-    const response = await fetch(`${local_json_db}/transactions`);
+    const response = await fetch(`${local_json_db}/deposit`);
     if (!response.ok) {
       throw new Error(`ERROR! Status: ${response.status}`);
     }
     const data = await response.json();
-    const transactions_data = data.deposit;
+    const transactions_data = data;
 
     if (
       request_obj.amount > transaction_limits.max_deposit_amount_per_transaction
@@ -192,12 +202,12 @@ async function deposit(request_obj) {
 
 async function withdraw(request_obj) {
   try {
-    const response = await fetch(`${local_json_db}/transactions`);
+    const response = await fetch(`${local_json_db}/withdrawal`);
     if (!response.ok) {
       throw new Error(`ERROR! Status: ${response.status}`);
     }
     const data = await response.json();
-    const transactions_data = data.withdrawal;
+    const transactions_data = data;
 
     if (
       request_obj.amount >
@@ -242,7 +252,6 @@ async function withdraw(request_obj) {
     throw error;
   }
 }
-
 function displayErrorNotification(message) {
   const notificationDiv = document.createElement("div");
   notificationDiv.classList.add("error_notification");
@@ -257,6 +266,7 @@ function displayErrorNotification(message) {
     notificationDiv.remove();
   }, 7000);
 }
+
 function displaySuccessNotification(message) {
   const notificationDiv = document.createElement("div");
   notificationDiv.classList.add("success_notification");
@@ -272,15 +282,12 @@ function displaySuccessNotification(message) {
   }, 7000);
 }
 
-// ------------------------ INITIATE APP ------------------------
+// ------------------------ INITIALIZE APP ------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
   get_balance();
-  const deposit_service = document.getElementById("deposit_service");
-  const withdraw_service = document.getElementById("withdraw_service");
-  const deposit_form = document.getElementById("makeADeposit");
-  const withdrawal_form = document.getElementById("makeAWithdrawal");
+
   deposit_service.addEventListener("click", () => {
     if (deposit_form.style.display === "none") {
       deposit_form.style.display = "block";
@@ -289,6 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
       deposit_form.style.display = "none";
     }
   });
+
   withdraw_service.addEventListener("click", () => {
     if (withdrawal_form.style.display === "none") {
       withdrawal_form.style.display = "block";
@@ -297,8 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
       withdrawal_form.style.display = "none";
     }
   });
-  const withdrawalForm = document.getElementById("makeAWithdrawal");
-  const withdrawAmountInput = document.getElementById("withdrawAmountInput");
+
   withdrawalForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const request_obj = {
@@ -309,9 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(request_obj);
     withdraw(request_obj);
   });
-
-  const depositForm = document.getElementById("makeADeposit");
-  const depositAmountInput = document.getElementById("depositAmountInput");
 
   depositForm.addEventListener("submit", (e) => {
     e.preventDefault();

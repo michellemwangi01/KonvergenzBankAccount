@@ -69,6 +69,11 @@ button.link-button {
 .balance {
   flex-grow: 1;
 }
+#get_balance_btn:hover {
+  background-color: #fff;
+  color: green;
+  border: 1px solid green;
+}
 .service-item {
   width: 75%;
   display: flex;
@@ -80,6 +85,11 @@ button.link-button {
   margin: 1rem;
   padding: 1rem;
   border-radius: 10px;
+}
+.service-item:hover {
+  background-color: #fff;
+  color: green;
+  border: 2px solid green;
 }
 .balance-button {
   background-color: #a8d496;

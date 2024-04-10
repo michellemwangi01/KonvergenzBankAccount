@@ -1,200 +1,132 @@
 {
   "balance": {
-    "amount": 2339
+    "amount": 2562
   },
-  "transactions": {
-    "deposit": {
-      "count": 3,
-      "total": 1408,
-      "last_deposits": [
-        {
-          "ID": 1,
-          "amount": 2000,
-          "date": "2024-04-09T19:18:09.710Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 2,
-          "amount": 2000,
-          "date": "2024-04-09T19:18:15.066Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 3,
-          "amount": 2000,
-          "date": "2024-04-09T19:18:27.096Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 4,
-          "amount": null,
-          "date": "2024-04-09T22:22:44.202Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 5,
-          "amount": 90,
-          "date": "2024-04-09T22:26:08.264Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 6,
-          "amount": 12,
-          "date": "2024-04-09T22:53:33.270Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 7,
-          "amount": 12,
-          "date": "2024-04-09T22:55:13.800Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 8,
-          "amount": 23,
-          "date": "2024-04-09T22:55:27.725Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 9,
-          "amount": 234,
-          "date": "2024-04-09T23:06:37.857Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 10,
-          "amount": 9,
-          "date": "2024-04-09T23:07:25.790Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 11,
-          "amount": 9,
-          "date": "2024-04-09T23:10:58.009Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 12,
-          "amount": 9,
-          "date": "2024-04-09T23:19:48.524Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 13,
-          "amount": 908,
-          "date": "2024-04-09T23:30:10.476Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 14,
-          "amount": 12,
-          "date": "2024-04-09T23:31:34.597Z",
-          "transaction_type": "deposit"
-        },
-        {
-          "ID": 15,
-          "amount": 89,
-          "date": "2024-04-09T23:47:59.593Z",
-          "transaction_type": "deposit"
-        }
-      ]
-    },
-    "withdrawal": {
-      "count": 3,
-      "total": 42367,
-      "last_withdrawals": [
-        {
-          "ID": 1,
-          "amount": 2000,
-          "date": "2024-04-09T19:35:10.692Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 2,
-          "amount": 2000,
-          "date": "2024-04-09T19:35:23.667Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 3,
-          "amount": 2000,
-          "date": "2024-04-09T19:35:26.799Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 4,
-          "amount": 100,
-          "date": "2024-04-09T19:39:18.566Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 5,
-          "amount": 100,
-          "date": "2024-04-09T19:39:21.840Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 6,
-          "amount": 100,
-          "date": "2024-04-09T19:39:40.250Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 7,
-          "amount": 19999,
-          "date": "2024-04-09T19:42:32.884Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 8,
-          "amount": 19999,
-          "date": "2024-04-09T19:42:39.308Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 9,
-          "amount": 1,
-          "date": "2024-04-09T22:12:50.875Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 10,
-          "amount": 9,
-          "date": "2024-04-09T23:13:47.544Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 11,
-          "amount": 9,
-          "date": "2024-04-09T23:14:38.680Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 12,
-          "amount": 9,
-          "date": "2024-04-09T23:20:16.858Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 13,
-          "amount": 9,
-          "date": "2024-04-09T23:30:28.949Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 14,
-          "amount": 9,
-          "date": "2024-04-09T23:32:03.384Z",
-          "transaction_type": "withdrawal"
-        },
-        {
-          "ID": 15,
-          "amount": 23,
-          "date": "2024-04-09T23:42:55.957Z",
-          "transaction_type": "withdrawal"
-        }
-      ]
-    }
+  "deposit": {
+    "count": 2,
+    "total": 1831,
+    "last_deposits": [
+      {
+        "ID": 1,
+        "amount": 2000,
+        "date": "2024-04-09T19:18:09.710Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 2,
+        "amount": 2000,
+        "date": "2024-04-09T19:18:15.066Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 3,
+        "amount": 2000,
+        "date": "2024-04-09T19:18:27.096Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 4,
+        "amount": null,
+        "date": "2024-04-09T22:22:44.202Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 5,
+        "amount": 90,
+        "date": "2024-04-09T22:26:08.264Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 6,
+        "amount": 12,
+        "date": "2024-04-09T22:53:33.270Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 7,
+        "amount": 12,
+        "date": "2024-04-09T22:55:13.800Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 8,
+        "amount": 23,
+        "date": "2024-04-09T22:55:27.725Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 9,
+        "amount": 234,
+        "date": "2024-04-09T23:06:37.857Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 10,
+        "amount": 9,
+        "date": "2024-04-09T23:07:25.790Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 11,
+        "amount": 9,
+        "date": "2024-04-09T23:10:58.009Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 12,
+        "amount": 9,
+        "date": "2024-04-09T23:19:48.524Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 13,
+        "amount": 908,
+        "date": "2024-04-09T23:30:10.476Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 14,
+        "amount": 12,
+        "date": "2024-04-09T23:31:34.597Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 15,
+        "amount": 89,
+        "date": "2024-04-09T23:47:59.593Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 16,
+        "amount": 23,
+        "date": "2024-04-10T00:21:08.170Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 17,
+        "amount": 200,
+        "date": "2024-04-10T00:59:25.495Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 18,
+        "amount": 200,
+        "date": "2024-04-10T00:59:48.645Z",
+        "transaction_type": "deposit"
+      }
+    ]
+  },
+  "withdrawal": {
+    "count": 1,
+    "total": 42567,
+    "last_withdrawals": [
+      {
+        "ID": 1,
+        "amount": 200,
+        "date": "2024-04-10T01:04:46.146Z",
+        "transaction_type": "withdrawal"
+      }
+    ]
   },
   "limits": {
     "deposit": {
