@@ -30,6 +30,10 @@ cd bank_account_konvergenz
 4. **Open the Application**
    Open the `index.html` in your web browser to access the transaction management application or run using VS code live server.
 
+## Accessing the deployed application
+
+- The deployed application can be accessed on the link: `https://michellemwangi01.github.io/KonvergenzBankAccount_hosted/`
+
 ## Features
 
 - **Deposit and Withdrawal**
