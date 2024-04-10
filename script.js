@@ -152,12 +152,6 @@ async function deposit(request_obj) {
     const data = await response.json();
     const transactions_data = data.deposit;
 
-    console.log(transactions_data);
-
-    console.log(transaction_limits);
-
-    console.log(request_obj);
-
     if (
       request_obj.amount > transaction_limits.max_deposit_amount_per_transaction
     ) {
