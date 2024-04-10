@@ -1,10 +1,10 @@
 {
   "balance": {
-    "amount": 38883
+    "amount": 40115
   },
   "deposit": {
-    "count": 1,
-    "total": 41747,
+    "count": 2,
+    "total": 1979,
     "last_deposits": [
       {
         "ID": 1,
@@ -17,12 +17,18 @@
         "amount": 9009,
         "date": "2024-04-10T03:29:28.872Z",
         "transaction_type": "deposit"
+      },
+      {
+        "ID": 3,
+        "amount": 1232,
+        "date": "2024-04-10T13:47:34.201Z",
+        "transaction_type": "deposit"
       }
     ]
   },
   "withdrawal": {
     "count": 0,
-    "total": 46099,
+    "total": 46,
     "last_withdrawals": []
   },
   "limits": {

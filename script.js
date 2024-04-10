@@ -1,4 +1,5 @@
 const local_json_db = `http://localhost:3000`;
+const hosted_json_db = "https://db-konvergenzbankaccount.onrender.com/";
 const depositBtn = document.getElementById("deposit-button");
 const getBalanceBtn = document.getElementById("get_balance_btn");
 const withdrawBtn = document.getElementById("withdraw-button");
@@ -39,6 +40,7 @@ function get_balance() {
     .then((data) => {
       current_balance = data.amount;
     })
+
     .catch((error) => {
       console.error("Error message:", error.message);
       displayErrorNotification(
@@ -156,7 +158,9 @@ async function update_balance_and_transaction(request_obj) {
         "notificationMessage",
         `SUCCESS! Your ${request_obj.transaction_type} has been successfully completed.`
       );
-      displaySuccessNotification("SUccess");
+      displaySuccessNotification(
+        `SUCCESS! Your ${request_obj.transaction_type} has been successfully completed.`
+      );
     })
     .catch((error) => {
       console.error("Did not upate balance and transaction", error.status);
