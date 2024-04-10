@@ -7,15 +7,28 @@
     <title>Bank Account | Michelle</title>
   </head>
   <body>
+    <div id="landing_page">
+      <h1>Welcome to Konvergenz Bank</h1>
+      
+      <form id="create_user_form">
+        <h2>Create an Account</h2>
+<label for="username">Username</label>
+      <input type="text" name="username" id="username_input">
+      <button id="create_account" type="submit">Create</button>
+      </form>
+      
+    </div>
+<div id="account_page" >
     <div id="notificationContainer"></div>
 
-    <h1 id="welcome_info">Welcome, Michelle</h1>
+<h1 id="welcome_info">Welcome, User</h1>
+
     <div class="account_details">
       <h2 id="your_details_title">Your Account Details</h2>
      <div class="acct-info"> 
       <div class="container">
           <button class="balance-button get-balance" id="">Name:</button>
-          <span class="stars">Michelle Mwangi</span>
+          <span id="username_detail" class="stars">Michelle Mwangi</span>
         </div>
         <div class="container">
           <button class="balance-button get-balance" id="">Account ID:</button>
@@ -29,7 +42,7 @@
         </div></div>
        
       </div>
-    </div>
+    
  <p id="selectAservice">Select a service</p>
     <div class="services">
     
@@ -82,8 +95,10 @@
         </form>
     <div>
      
-      <div></div>
+    <button id="resetCountsBtn">Admin:Reset Counts</button>
     </div>
+</div>
+    
     <script src="./script.js"></script>
   </body>
 </html>

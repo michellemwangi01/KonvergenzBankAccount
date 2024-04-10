@@ -2,9 +2,14 @@ const local_json_db = `http://localhost:3000`;
 const depositBtn = document.getElementById("deposit-button");
 const getBalanceBtn = document.getElementById("get_balance_btn");
 const withdrawBtn = document.getElementById("withdraw-button");
+const resetCountsBtn = document.getElementById("resetCountsBtn");
+const create_account = document.getElementById("create_account");
+const account_page = document.getElementById("account_page");
+const landing_page = document.getElementById("landing_page");
 const deposit_service = document.getElementById("deposit_service");
 const withdraw_service = document.getElementById("withdraw_service");
 const deposit_form = document.getElementById("makeADeposit");
+const create_user_form = document.getElementById("create_user_form");
 const withdrawal_form = document.getElementById("makeAWithdrawal");
 const withdrawalForm = document.getElementById("makeAWithdrawal");
 const withdrawAmountInput = document.getElementById("withdrawAmountInput");
@@ -12,6 +17,7 @@ const depositForm = document.getElementById("makeADeposit");
 const depositAmountInput = document.getElementById("depositAmountInput");
 let current_balance;
 let transaction_limits;
+let username;
 
 async function init() {
   try {
@@ -147,6 +153,7 @@ async function update_balance_and_transaction(request_obj) {
         "notificationMessage",
         `SUCCESS! Your ${request_obj.transaction_type} has been successfully completed.`
       );
+      displaySuccessNotification("SUccess");
     })
     .catch((error) => {
       console.error("Did not upate balance and transaction", error.status);
@@ -252,6 +259,7 @@ async function withdraw(request_obj) {
     throw error;
   }
 }
+
 function displayErrorNotification(message) {
   const notificationDiv = document.createElement("div");
   notificationDiv.classList.add("error_notification");
@@ -282,11 +290,63 @@ function displaySuccessNotification(message) {
   }, 7000);
 }
 
+async function reset_counts() {
+  try {
+    // Reset deposit count
+    const response1 = await fetch(`${local_json_db}/deposit`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ count: 0 }),
+    });
+
+    if (!response1.ok) {
+      throw new Error("Reset deposit count failed");
+    }
+
+    // Reset withdrawal count
+    const response2 = await fetch(`${local_json_db}/withdrawal`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ count: 0 }),
+    });
+
+    if (!response2.ok) {
+      throw new Error("Reset withdrawal count failed");
+    }
+
+    console.log("Counts reset successfully");
+    return true;
+  } catch (error) {
+    console.error("Error resetting counts:", error.message);
+    return false;
+  }
+}
+
 // ------------------------ INITIALIZE APP ------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
   get_balance();
+
+  create_account.addEventListener("click", () => {
+    if (localStorage.getItem("username") === null) {
+      create_user_form.style.display = "block";
+    } else {
+      create_user_form.style.display = "none";
+    }
+  });
+
+  create_user_form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    username = document.getElementById("username_input").value;
+    document.getElementById("welcome_info").innerText = `Welcome, ${username}`;
+    document.getElementById("username_detail").innerText = `${username}`;
+    localStorage.setItem("username", username);
+  });
 
   deposit_service.addEventListener("click", () => {
     if (deposit_form.style.display === "none") {
@@ -340,6 +400,19 @@ document.addEventListener("DOMContentLoaded", () => {
     balance_value.innerText = `${formattedBalance}`;
   });
 
+  resetCountsBtn.addEventListener("click", () => {
+    reset_counts()
+      .then((success) => {
+        if (success) {
+          console.log("Reset successfully");
+        } else {
+          console.log("Reset Failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Error occurred during count reset:", error);
+      });
+  });
   const notificationMessage = localStorage.getItem("notificationMessage");
 
   if (notificationMessage) {

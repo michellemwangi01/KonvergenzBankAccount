@@ -1,7 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;1,100;1,200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&family=IBM+Plex+Serif:wght@300&family=Kalam:wght@300&family=Satisfy&display=swap");
+
 body {
   background-color: white;
   min-height: 100vh;
   color: black;
+  margin: 0;
 }
 .services {
   display: flex;
@@ -222,4 +227,32 @@ legend {
 #selectAservice {
   text-align: center;
   font-size: 1rem;
+}
+#landing_page {
+  display: flex;
+  color: white;
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  min-height: 40vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-position: 0%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)),
+    url("https://businesspostbd.com/files/media/daily-media/2023/03/14/31.png");
+}
+#create_account {
+  background-color: green;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 2px;
+  color: white;
+}
+#username_input {
+  background-color: #fff;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 2px;
 }

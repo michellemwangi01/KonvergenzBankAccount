@@ -28,7 +28,7 @@ cd bank_account_konvergenz
    `json-server --watch db.json --port 3000`
 
 4. **Open the Application**
-   Open `index.html` in your web browser to access the transaction management application.
+   Open the `index.html` in your web browser to access the transaction management application or run using VS code live server.
 
 ## Features
 
