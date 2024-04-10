@@ -326,7 +326,7 @@ async function reset_counts() {
   }
 }
 
-// ------------------------ INITIALIZE APP ------------------------
+// ----------------------- INITIALIZE APP ------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
