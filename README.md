@@ -36,16 +36,16 @@ cd bank_account_konvergenz
 - **Deposit and Withdrawal**
 - Users can perform deposit and withdrawal transactions based on specified limits.
 - The application checks transaction limits retrieved from the JSON server (`/limits`) before processing each transaction.
-  ![alt text](image-3.png)
+  ![alt text](Images/image-3.png)
 
 - **Balance Retrieval**
 - Users can retrieve and display their current balance (`/balance`) by clicking the "Get Balance" button.
-  ![alt text](image-1.png)
+  ![alt text](Images/image-1.png)
 
 - **Error Handling and Notifications**
 - Error messages and notifications are displayed to users based on transaction outcomes and limits.
 - Success and failure notifications are displayed for successful transactions.
-  ![alt text](image-4.png)
+  ![alt text](Images/image-4.png)
 
 ## Code Overview
 
