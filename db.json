@@ -1,120 +1,16 @@
 {
   "balance": {
-    "amount": 30638
+    "amount": 29851
   },
   "deposit": {
-    "count": 3,
-    "total": 32625,
-    "last_deposits": [
-      {
-        "ID": 1,
-        "amount": 900,
-        "date": "2024-04-10T02:30:38.211Z",
-        "transaction_type": "deposit"
-      },
-      {
-        "ID": 2,
-        "amount": 90,
-        "date": "2024-04-10T02:34:57.551Z",
-        "transaction_type": "deposit"
-      },
-      {
-        "ID": 3,
-        "amount": 909,
-        "date": "2024-04-10T02:35:23.533Z",
-        "transaction_type": "deposit"
-      },
-      {
-        "ID": 4,
-        "amount": 12323,
-        "date": "2024-04-10T02:48:32.008Z",
-        "transaction_type": "deposit"
-      },
-      {
-        "ID": 5,
-        "amount": 89,
-        "date": "2024-04-10T02:54:48.843Z",
-        "transaction_type": "deposit"
-      },
-      {
-        "ID": 6,
-        "amount": 600,
-        "date": "2024-04-10T02:55:05.887Z",
-        "transaction_type": "deposit"
-      },
-      {
-        "ID": 7,
-        "amount": 600,
-        "date": "2024-04-10T02:55:17.510Z",
-        "transaction_type": "deposit"
-      }
-    ]
+    "count": 4,
+    "total": 32715,
+    "last_deposits": []
   },
   "withdrawal": {
-    "count": 2,
-    "total": 45222,
-    "last_withdrawals": [
-      {
-        "ID": 1,
-        "amount": 200,
-        "date": "2024-04-10T01:04:46.146Z",
-        "transaction_type": "withdrawal"
-      },
-      {
-        "ID": 2,
-        "amount": 90,
-        "date": "2024-04-10T01:38:33.058Z",
-        "transaction_type": "withdrawal"
-      },
-      {
-        "ID": 3,
-        "amount": 87,
-        "date": "2024-04-10T01:47:05.027Z",
-        "transaction_type": "withdrawal"
-      },
-      {
-        "ID": 4,
-        "amount": 99,
-        "date": "2024-04-10T01:48:15.055Z",
-        "transaction_type": "withdrawal"
-      },
-      {
-        "ID": 5,
-        "amount": 99,
-        "date": "2024-04-10T01:48:29.211Z",
-        "transaction_type": "withdrawal"
-      },
-      {
-        "ID": 6,
-        "amount": 99,
-        "date": "2024-04-10T01:48:33.190Z",
-        "transaction_type": "withdrawal"
-      },
-      {
-        "ID": 7,
-        "amount": 90,
-        "date": "2024-04-10T02:27:03.842Z",
-        "transaction_type": "withdrawal"
-      },
-      {
-        "ID": 8,
-        "amount": 90,
-        "date": "2024-04-10T02:30:28.952Z",
-        "transaction_type": "withdrawal"
-      },
-      {
-        "ID": 9,
-        "amount": 1,
-        "date": "2024-04-10T02:51:16.003Z",
-        "transaction_type": "withdrawal"
-      },
-      {
-        "ID": 10,
-        "amount": 2000,
-        "date": "2024-04-10T02:55:28.064Z",
-        "transaction_type": "withdrawal"
-      }
-    ]
+    "count": 3,
+    "total": 46099,
+    "last_withdrawals": []
   },
   "limits": {
     "deposit": {

@@ -41,6 +41,9 @@ function get_balance() {
     })
     .catch((error) => {
       console.error("Error message:", error.message);
+      displayErrorNotification(
+        "ERROR! You are not connected to a network. Please start your json-server."
+      );
     });
   return current_balance;
 }
@@ -202,7 +205,11 @@ async function deposit(request_obj) {
 
     return;
   } catch (error) {
-    console.error("Error in deposit function:", error.message);
+    console.error("Error:", error.status);
+    displayErrorNotification(
+      "ERROR! You are not connected to a network. Please start your json-server."
+    );
+
     throw error;
   }
 }
@@ -255,7 +262,10 @@ async function withdraw(request_obj) {
     await update_balance_and_transaction(request_obj);
     return;
   } catch (error) {
-    console.error("Error in deposit function:", error.message);
+    console.error("Error:", error.message);
+    displayErrorNotification(
+      "ERROR! You are not connected to a network. Please start your json-server."
+    );
     throw error;
   }
 }
