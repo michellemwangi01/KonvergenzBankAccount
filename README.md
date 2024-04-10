@@ -51,6 +51,9 @@ cd bank_account_konvergenz
 - Success and failure notifications are displayed for successful transactions.
   ![alt text](Images/image-4.png)
 
+- **Admin Feature: Reset Counts**
+- Comes with Admin feature to reset the counts to 0 from the UI bu using an endpoint to reset the deposit and withdrawal counts.
+
 ## Code Overview
 
 The application consists of the following components:

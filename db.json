@@ -1,14 +1,27 @@
 {
   "balance": {
-    "amount": 29851
+    "amount": 38883
   },
   "deposit": {
-    "count": 4,
-    "total": 32715,
-    "last_deposits": []
+    "count": 1,
+    "total": 41747,
+    "last_deposits": [
+      {
+        "ID": 1,
+        "amount": 23,
+        "date": "2024-04-10T03:27:30.360Z",
+        "transaction_type": "deposit"
+      },
+      {
+        "ID": 2,
+        "amount": 9009,
+        "date": "2024-04-10T03:29:28.872Z",
+        "transaction_type": "deposit"
+      }
+    ]
   },
   "withdrawal": {
-    "count": 3,
+    "count": 0,
     "total": 46099,
     "last_withdrawals": []
   },
